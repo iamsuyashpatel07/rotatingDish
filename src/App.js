@@ -1,39 +1,169 @@
+import React, { useState } from "react";
 import Header from "./component/header";
-import ThirtyTwo from "./component/icon/thirtyTwo";
 import "./App.css";
 import Arrow from "./component/icon/Arrow";
-import Image from "./component/icon/Image.svg";
+import Arrow1 from "./component/icon/Arrow1";
 import Image1 from "./component/icon/image1.svg";
 import Image2 from "./component/icon/image2.svg";
 import Image3 from "./component/icon/image3.svg";
 import Image4 from "./component/icon/image4.svg";
 import Image5 from "./component/icon/image5.svg";
 function App() {
+  const [dish] = useState([
+    {
+      img_src: "./component/icon/image2.svg",
+      price: "$35",
+      priceColor: "#54BF29",
+      background: "#EAFFE2",
+      header: "Asian Cucumber <br/> Salad",
+      text: "Asian Cucumber Salad Recipe made with crunchy <br/> cucumber, onion, rice wine vinegar, and a few secret <br/> ingredients!",
+    },
+    {
+      img_src: "./component/icon/image3.svg",
+      price: "$32",
+      priceColor: "##FF922C;",
+      background: "#FFEEDE",
+      header: "Green Goddess <br /> Chicken Salad",
+      text: "It is a non vegetarian salad which consists of the <br/> green goddess dressing mixed with chicken, <br/> peppers, olives and celery. ",
+    },
+    {
+      img_src: "./component/icon/image4.svg",
+      price: "$38",
+      priceColor: "#0a5efc",
+      background: "#8fb6ff",
+      header: "Green Goddess <br /> Chicken Tandori",
+      text: "It is a non vegetarian salad which consists of the <br/> green goddess dressing mixed with chicken, <br/> peppers, olives and celery. ",
+    },
+  ]);
+  function rotate() {
+    const idx = Math.floor(Math.random() * 4) - 1;
+    const str = dish[idx].price;
+    const priceColor = dish[idx].priceColor;
+    const color = dish[idx].background;
+    const header = dish[idx].header;
+    const para = dish[idx].text;
+    const img = dish[idx].img_src;
+    document.getElementById("price").innerHTML = str;
+    document.getElementById("bgcolor").style.background = color;
+    document.getElementById("price").style.color = priceColor;
+    document.getElementById("btnColor").style.background = priceColor;
+    document.getElementById("header").innerHTML = header;
+    document.getElementById("para").innerHTML = para;
+    document.getElementById("imageid").src = img;
+    document.getElementById("arrow").style.fill = priceColor;
+    document.getElementById("arrow1").style.fill = priceColor;
+    console.log(img);
+  }
   return (
     <div>
       <div
         style={{
-          position: "absolute",
-          width: "1177px",
-          height: "1177px",
-          left: "283px",
-          top: "-645px",
+          width: "1077px",
+          height: "1077px",
+          marginLeft: "24%",
+          marginTop: "-645px",
           background: "#FFEEDE",
           borderRadius: "50%",
         }}
-      ></div>
-      <Header />
+        id="bgcolor"
+      >
+        <Header />
+        <div className="container">
+          <div
+            style={{
+              position: "absolute",
+              width: "102px",
+              height: "136px",
+              left: "611.6px",
+              top: "110px",
+              transform: "rotate(-59.92deg)",
+            }}
+            className="one"
+          >
+            <img src={Image1} style={{ borderRadius: "50%" }} alt="dish" />
+          </div>
+          <div
+            style={{
+              position: "absolute",
+              width: "264px",
+              height: "175px",
+              left: "825px",
+              top: "60px",
+            }}
+          >
+            <img src={Image2} style={{ borderRadius: "50%" }} alt="dish" />
+          </div>
+          <div
+            style={{
+              position: "absolute",
+              width: "102px",
+              height: "136px",
+              left: "1050px",
+              top: "110px",
+            }}
+            className="three"
+          >
+            <img src={Image3} style={{ borderRadius: "50%" }} alt="dish" />
+          </div>
+          <div
+            style={{
+              position: "absolute",
+              width: "213px",
+              maxWidth: "100px",
+              height: "220px",
+              left: "440px",
+              top: "250px",
+            }}
+            className="four"
+          >
+            <img src={Image4} style={{ borderRadius: "50%" }} alt="dish" />
+          </div>
+          <div
+            style={{
+              position: "absolute",
+              width: "213px",
+              height: "220px",
+              left: "1150px",
+              top: "250px",
+            }}
+            className="five"
+          >
+            <img
+              src={Image5}
+              style={{
+                borderRadius: "50%",
+              }}
+              alt="dish"
+            />
+          </div>
+          <div
+            style={{
+              position: "absolute",
+              width: "786.56px",
+              height: "521.39px",
+              left: "750px",
+              top: "270px",
+            }}
+          >
+            <img
+              id="imageid"
+              src={Image3}
+              style={{ borderRadius: "50%", width: "30%", height: "auto" }}
+              alt="dish"
+            />
+          </div>
+        </div>
+      </div>
+
       <div
         style={{
           position: "absolute",
           width: "81px",
           height: "66px",
           left: "100px",
-          top: "286px",
-
-          fontFamily: "Poppins",
-          fontStyle: "normal",
-          fontWeight: "600",
+          top: "180px",
+          fontStyle: "bold",
+          fontWeight: "700",
           fontSize: "44px",
           lineHeight: "66px",
           /* identical to box height */
@@ -44,8 +174,10 @@ function App() {
 
           color: "#FF922C",
         }}
+        className="font-poppins"
+        id="price"
       >
-        <ThirtyTwo />
+        $32
       </div>
       <div
         style={{
@@ -53,9 +185,7 @@ function App() {
           width: "367px",
           height: "100px",
           left: "100px",
-          top: "352px",
-
-          fontFamily: "Poppins",
+          top: "250px",
           fontStyle: "normal",
           fontWeight: "500",
           fontSize: "36px",
@@ -68,8 +198,10 @@ function App() {
           color: "#333333",
         }}
         className="font-poppins"
+        id="header"
       >
-        Green Goddess Chicken Salad
+        Green Goddess
+        <br /> Chicken Salad
       </div>
       <div
         style={{
@@ -77,7 +209,7 @@ function App() {
           width: "347px",
           height: "60px",
           left: "100px",
-          top: "464px",
+          top: "364px",
 
           fontStyle: "normal",
           fontWeight: "400",
@@ -90,9 +222,11 @@ function App() {
           color: "#333333",
         }}
         className="font-poppins"
+        id="para"
       >
-        It is a non vegetarian salad which consists of the green goddess
-        dressing mixed with chicken, peppers, olives and celery.
+        It is a non vegetarian salad which consists of the <br />
+        green goddess dressing mixed with chicken,
+        <br /> peppers, olives and celery.
       </div>
       <div
         style={{
@@ -100,12 +234,13 @@ function App() {
           width: "163px",
           height: "48px",
           left: "100px",
-          top: "552px",
+          top: "442px",
 
           background: "#FF922C",
           boxShadow: "0px 20px 40px #F4E2D1",
           borderRadius: "69px",
         }}
+        id="btnColor"
       >
         <div
           style={{
@@ -126,10 +261,11 @@ function App() {
           position: "absolute",
           width: "40px",
           height: "40px",
-          left: "568px",
-          top: "540px",
+          left: "618px",
+          top: "500px",
           transform: "rotate(-180deg)",
         }}
+        onClick={rotate}
       >
         <Arrow />
       </div>
@@ -139,78 +275,11 @@ function App() {
           width: "40px",
           height: "40px",
           left: "1100px",
-          top: "520px",
+          top: "480px",
         }}
+        onClick={rotate}
       >
-        <Arrow />
-      </div>
-
-      <div
-        style={{
-          position: "absolute",
-          width: "102px",
-          height: "136px",
-          left: "611.6px",
-          top: "121.05px",
-          transform: "rotate(-59.92deg)",
-        }}
-      >
-        <img src={Image1} style={{ borderRadius: "50%" }} alt="dish" />
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          width: "264px",
-          height: "175px",
-          left: "825px",
-          top: "100px",
-        }}
-      >
-        <img src={Image2} style={{ borderRadius: "50%" }} alt="dish" />
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          width: "102px",
-          height: "136px",
-          left: "1050px",
-          top: "133px",
-        }}
-      >
-        <img src={Image3} style={{ borderRadius: "50%" }} alt="dish" />
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          width: "213px",
-          height: "220px",
-          left: "380px",
-          top: "250px",
-        }}
-      >
-        <img src={Image4} style={{ borderRadius: "50%" }} alt="dish" />
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          width: "213px",
-          height: "220px",
-          left: "1260px",
-          top: "250px",
-        }}
-      >
-        <img src={Image5} style={{ borderRadius: "50%" }} alt="dish" />
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          width: "786.56px",
-          height: "521.39px",
-          left: "720px",
-          top: "350px",
-        }}
-      >
-        <img src={Image} style={{ borderRadius: "50%" }} alt="dish" />
+        <Arrow1 />
       </div>
     </div>
   );

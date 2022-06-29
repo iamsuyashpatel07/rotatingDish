@@ -16,7 +16,7 @@ function Arrow() {
           r="20"
           transform="rotate(-180 40 30)"
           fill="#FF922C"
-          id="arrow"
+          id="arrow1"
         />
       </g>
       <path
