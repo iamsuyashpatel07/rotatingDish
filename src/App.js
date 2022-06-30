@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import parse from "html-react-parser";
 import Header from "./component/header";
 import "./App.css";
 import Arrow from "./component/icon/Arrow";
@@ -11,7 +12,7 @@ import Image5 from "./component/icon/image5.svg";
 function App() {
   const [dish] = useState([
     {
-      img_src: "./component/icon/image2.svg",
+      img_src: "Image2",
       price: "$35",
       priceColor: "#54BF29",
       background: "#EAFFE2",
@@ -19,7 +20,7 @@ function App() {
       text: "Asian Cucumber Salad Recipe made with crunchy <br/> cucumber, onion, rice wine vinegar, and a few secret <br/> ingredients!",
     },
     {
-      img_src: "./component/icon/image3.svg",
+      img_src: "Image3",
       price: "$32",
       priceColor: "##FF922C;",
       background: "#FFEEDE",
@@ -27,7 +28,7 @@ function App() {
       text: "It is a non vegetarian salad which consists of the <br/> green goddess dressing mixed with chicken, <br/> peppers, olives and celery. ",
     },
     {
-      img_src: "./component/icon/image4.svg",
+      img_src: "Image4",
       price: "$38",
       priceColor: "#0a5efc",
       background: "#8fb6ff",
@@ -35,24 +36,26 @@ function App() {
       text: "It is a non vegetarian salad which consists of the <br/> green goddess dressing mixed with chicken, <br/> peppers, olives and celery. ",
     },
   ]);
+  const [imgsrc, setimgsrc] = useState("Image4");
+  const [price, setprice] = useState("$38");
+  const [priceColor, setpriceColor] = useState("#0a5efc");
+  const [background, setbackground] = useState("#8fb6ff");
+  const [header, setheader] = useState("Green Goddess  <br /> Chicken Tandori");
+  const [text, settext] = useState(
+    "It is a non vegetarian salad which consists of the <br/> green goddess dressing mixed with chicken, <br/> peppers, olives and celery. "
+  );
+
   function rotate() {
     const idx = Math.floor(Math.random() * 4) - 1;
-    const str = dish[idx].price;
-    const priceColor = dish[idx].priceColor;
-    const color = dish[idx].background;
-    const header = dish[idx].header;
-    const para = dish[idx].text;
-    const img = dish[idx].img_src;
-    document.getElementById("price").innerHTML = str;
-    document.getElementById("bgcolor").style.background = color;
-    document.getElementById("price").style.color = priceColor;
-    document.getElementById("btnColor").style.background = priceColor;
-    document.getElementById("header").innerHTML = header;
-    document.getElementById("para").innerHTML = para;
-    document.getElementById("imageid").src = img;
-    document.getElementById("arrow").style.fill = priceColor;
-    document.getElementById("arrow1").style.fill = priceColor;
-    console.log(img);
+    let index = idx;
+    setimgsrc(dish[index].img_src);
+    setprice(dish[index].price);
+    setpriceColor(dish[index].priceColor);
+    setbackground(dish[index].background);
+    setheader(dish[index].header);
+    settext(dish[index].text);
+
+    console.log(idx);
   }
   return (
     <div>
@@ -62,7 +65,7 @@ function App() {
           height: "1077px",
           marginLeft: "24%",
           marginTop: "-645px",
-          background: "#FFEEDE",
+          background: background,
           borderRadius: "50%",
         }}
         id="bgcolor"
@@ -81,7 +84,7 @@ function App() {
             className="one"
           >
             <img src={Image1} style={{ borderRadius: "50%" }} alt="dish" />
-          </div>
+          </div>{" "}
           <div
             style={{
               position: "absolute",
@@ -92,7 +95,7 @@ function App() {
             }}
           >
             <img src={Image2} style={{ borderRadius: "50%" }} alt="dish" />
-          </div>
+          </div>{" "}
           <div
             style={{
               position: "absolute",
@@ -104,7 +107,7 @@ function App() {
             className="three"
           >
             <img src={Image3} style={{ borderRadius: "50%" }} alt="dish" />
-          </div>
+          </div>{" "}
           <div
             style={{
               position: "absolute",
@@ -117,7 +120,7 @@ function App() {
             className="four"
           >
             <img src={Image4} style={{ borderRadius: "50%" }} alt="dish" />
-          </div>
+          </div>{" "}
           <div
             style={{
               position: "absolute",
@@ -135,7 +138,7 @@ function App() {
               }}
               alt="dish"
             />
-          </div>
+          </div>{" "}
           <div
             style={{
               position: "absolute",
@@ -146,15 +149,14 @@ function App() {
             }}
           >
             <img
+              src={imgsrc}
               id="imageid"
-              src={Image3}
               style={{ borderRadius: "50%", width: "30%", height: "auto" }}
               alt="dish"
             />
-          </div>
-        </div>
+          </div>{" "}
+        </div>{" "}
       </div>
-
       <div
         style={{
           position: "absolute",
@@ -172,13 +174,13 @@ function App() {
           alignItems: "flex-end",
           textTransform: "capitalize",
 
-          color: "#FF922C",
+          color: priceColor,
         }}
         className="font-poppins"
         id="price"
       >
-        $32
-      </div>
+        {price}
+      </div>{" "}
       <div
         style={{
           position: "absolute",
@@ -200,9 +202,8 @@ function App() {
         className="font-poppins"
         id="header"
       >
-        Green Goddess
-        <br /> Chicken Salad
-      </div>
+        {parse(header)}
+      </div>{" "}
       <div
         style={{
           position: "absolute",
@@ -224,10 +225,8 @@ function App() {
         className="font-poppins"
         id="para"
       >
-        It is a non vegetarian salad which consists of the <br />
-        green goddess dressing mixed with chicken,
-        <br /> peppers, olives and celery.
-      </div>
+        {parse(text)}
+      </div>{" "}
       <div
         style={{
           position: "absolute",
@@ -236,11 +235,10 @@ function App() {
           left: "100px",
           top: "442px",
 
-          background: "#FF922C",
+          background: priceColor,
           boxShadow: "0px 20px 40px #F4E2D1",
           borderRadius: "69px",
         }}
-        id="btnColor"
       >
         <div
           style={{
@@ -254,8 +252,8 @@ function App() {
           className="font-poppins"
         >
           ORDER NOW{" "}
-        </div>
-      </div>
+        </div>{" "}
+      </div>{" "}
       <div
         style={{
           position: "absolute",
@@ -267,8 +265,8 @@ function App() {
         }}
         onClick={rotate}
       >
-        <Arrow />
-      </div>
+        <Arrow fill={priceColor} />
+      </div>{" "}
       <div
         style={{
           position: "absolute",
@@ -279,8 +277,8 @@ function App() {
         }}
         onClick={rotate}
       >
-        <Arrow1 />
-      </div>
+        <Arrow1 fill={priceColor} />
+      </div>{" "}
     </div>
   );
 }

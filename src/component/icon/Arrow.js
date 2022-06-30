@@ -1,6 +1,6 @@
 import React from "react";
 
-function Arrow() {
+function Arrow({ fill }) {
   return (
     <svg
       width="80"
@@ -15,8 +15,7 @@ function Arrow() {
           cy="30"
           r="20"
           transform="rotate(-180 40 30)"
-          fill="#FF922C"
-          id="arrow"
+          fill={fill}
         />
       </g>
       <path
