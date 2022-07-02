@@ -1,18 +1,22 @@
 import React, { useState } from "react";
 import parse from "html-react-parser";
+import Circle from "./component/icon/circle";
 import Header from "./component/header";
 import "./App.css";
 import Arrow from "./component/icon/Arrow";
 import Arrow1 from "./component/icon/Arrow1";
-import Image1 from "./component/icon/image1.svg";
-import Image2 from "./component/icon/image2.svg";
-import Image3 from "./component/icon/image3.svg";
-import Image4 from "./component/icon/image4.svg";
-import Image5 from "./component/icon/image5.svg";
+import { motion } from "framer-motion";
 function App() {
+  const [dishSpin, setdishSpin] = useState([
+    "./assets/image1.png",
+    "./assets/image2.png",
+    "./assets/image3.png",
+    "./assets/image4.png",
+    "./assets/image5.png",
+  ]);
   const [dish] = useState([
     {
-      img_src: "Image2",
+      img_src: "./assets/image4.png",
       price: "$35",
       priceColor: "#54BF29",
       background: "#EAFFE2",
@@ -20,15 +24,15 @@ function App() {
       text: "Asian Cucumber Salad Recipe made with crunchy <br/> cucumber, onion, rice wine vinegar, and a few secret <br/> ingredients!",
     },
     {
-      img_src: "Image3",
+      img_src: "./assets/image2.png",
       price: "$32",
-      priceColor: "##FF922C;",
+      priceColor: "#FF922C",
       background: "#FFEEDE",
       header: "Green Goddess <br /> Chicken Salad",
       text: "It is a non vegetarian salad which consists of the <br/> green goddess dressing mixed with chicken, <br/> peppers, olives and celery. ",
     },
     {
-      img_src: "Image4",
+      img_src: "/assets/image3.png",
       price: "$38",
       priceColor: "#0a5efc",
       background: "#8fb6ff",
@@ -36,7 +40,7 @@ function App() {
       text: "It is a non vegetarian salad which consists of the <br/> green goddess dressing mixed with chicken, <br/> peppers, olives and celery. ",
     },
   ]);
-  const [imgsrc, setimgsrc] = useState("Image4");
+  const [imgsrc, setimgsrc] = useState("./assets/image2.png");
   const [price, setprice] = useState("$38");
   const [priceColor, setpriceColor] = useState("#0a5efc");
   const [background, setbackground] = useState("#8fb6ff");
@@ -46,7 +50,7 @@ function App() {
   );
 
   function rotate() {
-    const idx = Math.floor(Math.random() * 4) - 1;
+    const idx = Math.floor(Math.random() * 2 + 0);
     let index = idx;
     setimgsrc(dish[index].img_src);
     setprice(dish[index].price);
@@ -55,7 +59,19 @@ function App() {
     setheader(dish[index].header);
     settext(dish[index].text);
 
-    console.log(idx);
+    // console.log(dish[index].img_src);
+    /*kth rotation*/
+    let latest = [];
+    let n = dishSpin.length;
+    let x = dishSpin[n - 1],
+      i;
+    for (i = n - 1; i > 0; i--) {
+      latest.push(dishSpin[i - 1]);
+    }
+    latest.push(x);
+
+    setdishSpin([latest[0], latest[1], latest[2], latest[3], latest[4]]);
+    /*end of rotation*/
   }
   return (
     <div>
@@ -71,6 +87,17 @@ function App() {
         id="bgcolor"
       >
         <Header />
+        <div
+          style={{
+            position: "absolute",
+            width: "560px",
+            height: "560px",
+            left: "552px",
+            top: "88px",
+          }}
+        >
+          <Circle fill={priceColor} />
+        </div>
         <div className="container">
           <div
             style={{
@@ -83,30 +110,30 @@ function App() {
             }}
             className="one"
           >
-            <img src={Image1} style={{ borderRadius: "50%" }} alt="dish" />
+            <img src={dishSpin[0]} style={{ borderRadius: "50%" }} alt="dish" />
           </div>{" "}
           <div
             style={{
               position: "absolute",
-              width: "264px",
+              width: "102px",
               height: "175px",
-              left: "825px",
-              top: "60px",
+              left: "795px",
+              top: "42px",
             }}
           >
-            <img src={Image2} style={{ borderRadius: "50%" }} alt="dish" />
+            <img src={dishSpin[1]} style={{ borderRadius: "50%" }} alt="dish" />
           </div>{" "}
           <div
             style={{
               position: "absolute",
               width: "102px",
               height: "136px",
-              left: "1050px",
-              top: "110px",
+              left: "1010px",
+              top: "140px",
             }}
             className="three"
           >
-            <img src={Image3} style={{ borderRadius: "50%" }} alt="dish" />
+            <img src={dishSpin[2]} style={{ borderRadius: "50%" }} alt="dish" />
           </div>{" "}
           <div
             style={{
@@ -114,42 +141,42 @@ function App() {
               width: "213px",
               maxWidth: "100px",
               height: "220px",
-              left: "440px",
-              top: "250px",
+              left: "500px",
+              top: "290px",
             }}
             className="four"
           >
-            <img src={Image4} style={{ borderRadius: "50%" }} alt="dish" />
+            <img src={dishSpin[3]} style={{ borderRadius: "50%" }} alt="dish" />
           </div>{" "}
           <div
             style={{
               position: "absolute",
               width: "213px",
               height: "220px",
-              left: "1150px",
-              top: "250px",
+              left: "1060px",
+              top: "299px",
             }}
             className="five"
           >
             <img
-              src={Image5}
+              src={dishSpin[4]}
               style={{
                 borderRadius: "50%",
               }}
               alt="dish"
             />
-          </div>{" "}
+          </div>
           <div
             style={{
               position: "absolute",
               width: "786.56px",
               height: "521.39px",
-              left: "750px",
+              left: "730px",
               top: "270px",
             }}
           >
             <img
-              src={imgsrc}
+              src={dishSpin[3]}
               id="imageid"
               style={{ borderRadius: "50%", width: "30%", height: "auto" }}
               alt="dish"
@@ -259,7 +286,7 @@ function App() {
           position: "absolute",
           width: "40px",
           height: "40px",
-          left: "618px",
+          left: "560px",
           top: "500px",
           transform: "rotate(-180deg)",
         }}
