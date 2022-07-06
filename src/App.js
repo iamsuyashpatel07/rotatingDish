@@ -48,7 +48,7 @@ function App() {
   const [text, settext] = useState(
     "It is a non vegetarian salad which consists of the <br/> green goddess dressing mixed with chicken, <br/> peppers, olives and celery. "
   );
-
+  const [spin, setspin] = useState(0);
   function rotate() {
     const idx = Math.floor(Math.random() * 2 + 0);
     let index = idx;
@@ -61,22 +61,35 @@ function App() {
 
     // console.log(dish[index].img_src);
     /*kth rotation*/
-    let latest = [];
-    let n = dishSpin.length;
-    let x = dishSpin[n - 1],
-      i;
-    for (i = n - 1; i > 0; i--) {
-      latest.push(dishSpin[i - 1]);
-    }
-    latest.push(x);
+    // let latest = [];
+    // let n = dishSpin.length;
+    // let x = dishSpin[n - 1],
+    //   i;
+    // for (i = n - 1; i > 0; i--) {
+    //   latest.push(dishSpin[i - 1]);
+    // }
+    // latest.push(x);
 
-    setdishSpin([latest[0], latest[1], latest[2], latest[3], latest[4]]);
+    // setdishSpin([latest[0], latest[1], latest[2], latest[3], latest[4]]);
     /*end of rotation*/
   }
+  function add() {
+    var x = spin + 30;
+    setspin(x);
+  }
+  function sub() {
+    var x = spin - 30;
+    setspin(x);
+  }
+
   return (
     <div>
+      <div style={{ position: "absolute", zIndex: 1 }}>
+        <Header />
+      </div>
       <div
         style={{
+          position: "absolute",
           width: "1077px",
           height: "1077px",
           marginLeft: "24%",
@@ -86,38 +99,37 @@ function App() {
         }}
         id="bgcolor"
       >
-        <Header />
         <div
           style={{
             position: "absolute",
             width: "560px",
             height: "560px",
-            left: "552px",
-            top: "88px",
+            left: "250px",
+            top: "715px",
           }}
         >
           <Circle fill={priceColor} />
         </div>
-        <div className="container">
-          <div
-            style={{
-              position: "absolute",
-              width: "102px",
-              height: "136px",
-              left: "611.6px",
-              top: "110px",
-              transform: "rotate(-59.92deg)",
-            }}
-            className="one"
-          >
-            <img src={dishSpin[0]} style={{ borderRadius: "50%" }} alt="dish" />
-          </div>{" "}
+        <div
+          style={{
+            position: "absolute",
+            top: "715px",
+            left: "250px",
+            right: "0",
+            border: "0px solid",
+            width: "560px",
+            height: "560px",
+            borderRadius: "50%",
+            transform: `rotate(${spin}deg)`,
+            transition: "2s",
+          }}
+        >
           <div
             style={{
               position: "absolute",
               width: "102px",
               height: "175px",
-              left: "795px",
+              left: "430px",
               top: "42px",
             }}
           >
@@ -128,10 +140,9 @@ function App() {
               position: "absolute",
               width: "102px",
               height: "136px",
-              left: "1010px",
-              top: "140px",
+              left: "8px",
+              top: "56px",
             }}
-            className="three"
           >
             <img src={dishSpin[2]} style={{ borderRadius: "50%" }} alt="dish" />
           </div>{" "}
@@ -139,24 +150,10 @@ function App() {
             style={{
               position: "absolute",
               width: "213px",
-              maxWidth: "100px",
               height: "220px",
-              left: "500px",
-              top: "290px",
+              left: "180px",
+              top: "-40px",
             }}
-            className="four"
-          >
-            <img src={dishSpin[3]} style={{ borderRadius: "50%" }} alt="dish" />
-          </div>{" "}
-          <div
-            style={{
-              position: "absolute",
-              width: "213px",
-              height: "220px",
-              left: "1060px",
-              top: "299px",
-            }}
-            className="five"
           >
             <img
               src={dishSpin[4]}
@@ -169,20 +166,103 @@ function App() {
           <div
             style={{
               position: "absolute",
-              width: "786.56px",
-              height: "521.39px",
-              left: "730px",
-              top: "270px",
+              width: "213px",
+              height: "220px",
+              left: "-40px",
+              top: "250px",
             }}
           >
             <img
-              src={dishSpin[3]}
-              id="imageid"
-              style={{ borderRadius: "50%", width: "30%", height: "auto" }}
+              src={dishSpin[4]}
+              style={{
+                borderRadius: "50%",
+              }}
               alt="dish"
             />
-          </div>{" "}
+          </div>
+          <div
+            style={{
+              position: "absolute",
+              width: "213px",
+              height: "220px",
+              left: "500px",
+              top: "250px",
+            }}
+          >
+            <img
+              src={dishSpin[4]}
+              style={{
+                borderRadius: "50%",
+              }}
+              alt="dish"
+            />
+          </div>
+          {/* lower bound start */}
+          <div>
+            <div
+              style={{
+                position: "absolute",
+                width: "786.56px",
+                height: "521.39px",
+                left: "40px",
+                top: "430px",
+              }}
+            >
+              <img
+                src={dishSpin[1]}
+                id="imageid"
+                style={{ borderRadius: "50%", width: "100px" }}
+                alt="dish"
+              />
+            </div>
+            <div
+              style={{
+                position: "absolute",
+                width: "102px",
+                height: "136px",
+                left: "460px",
+                top: "410px",
+                transform: "rotate(-59.92deg)",
+              }}
+              id="imageid"
+            >
+              <img
+                src={dishSpin[0]}
+                style={{ borderRadius: "50%" }}
+                alt="dish"
+              />
+            </div>
+            <div
+              style={{
+                position: "absolute",
+                width: "102px",
+                height: "136px",
+                left: "250px",
+                top: "480px",
+                transform: "rotate(-59.92deg)",
+              }}
+              id="imageid"
+            >
+              <img
+                src={dishSpin[0]}
+                style={{ borderRadius: "50%" }}
+                alt="dish"
+              />
+            </div>
+          </div>
+          {/* lower bound end */}
         </div>{" "}
+      </div>
+      <div
+        style={{
+          position: "absolute",
+          width: "213px",
+          height: "220px",
+          left: "730px",
+          top: "290px",
+        }}
+      >
+        <img src={dishSpin[3]} style={{ borderRadius: "50%" }} alt="dish" />
       </div>
       <div
         style={{
@@ -204,7 +284,6 @@ function App() {
           color: priceColor,
         }}
         className="font-poppins"
-        id="price"
       >
         {price}
       </div>{" "}
@@ -219,7 +298,6 @@ function App() {
           fontWeight: "500",
           fontSize: "36px",
           lineHeight: "50px",
-          /* or 139% */
 
           display: "flex",
           alignItems: "flex-end",
@@ -227,7 +305,6 @@ function App() {
           color: "#333333",
         }}
         className="font-poppins"
-        id="header"
       >
         {parse(header)}
       </div>{" "}
@@ -250,7 +327,6 @@ function App() {
           color: "#333333",
         }}
         className="font-poppins"
-        id="para"
       >
         {parse(text)}
       </div>{" "}
@@ -290,7 +366,10 @@ function App() {
           top: "500px",
           transform: "rotate(-180deg)",
         }}
-        onClick={rotate}
+        onClick={() => {
+          rotate();
+          add();
+        }}
       >
         <Arrow fill={priceColor} />
       </div>{" "}
@@ -302,7 +381,10 @@ function App() {
           left: "1100px",
           top: "480px",
         }}
-        onClick={rotate}
+        onClick={() => {
+          rotate();
+          sub();
+        }}
       >
         <Arrow1 fill={priceColor} />
       </div>{" "}
